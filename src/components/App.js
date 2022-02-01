@@ -1,11 +1,12 @@
 //상태관리
 import { useState } from "react";
 import AppRouter from "components/Router";
-import { auth } from "../fbase";
+import { authService } from "fbase";
 
-console.log(auth);
+
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
+ 
   return (
     <>
   <AppRouter isLoggedIn = {isLoggedIn}/>
