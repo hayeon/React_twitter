@@ -1,5 +1,8 @@
-import firebase  from "firebase/compat/app";
-import "firebase/compat/auth";
+import firebase from 'firebase/app'; 
+import 'firebase/auth'; 
+import 'firebase/firestore';
+
+
 
 const firebaseConfig = {
 apiKey: process.env.REACT_APP_API_KEY,
@@ -10,9 +13,13 @@ messagingSenderId: process.env.REACT_APP_MEDSSAGING_SENDER_ID,
 appId: process.env.REACT_APP_APP_ID,
 };
 
+
 firebase.initializeApp(firebaseConfig);
-//버전 9부터 auth 는 요런식으로 가져와야 합니다.
+//버전 9부터 auth 는 요런식으로 가져와야 함
 export const authService = firebase.auth;
+
+
+
 
 
 
