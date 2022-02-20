@@ -1,10 +1,11 @@
 import { authService } from 'fbase';
 import React, { useState } from 'react';
-
+//import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
 const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [newAccount, setNewAccount] = useState(true); // Account를 가지고 있는지 확인해서, newAccount 가 필요한 경우 true 
+    const [newAccount, setNewAccount] = useState(true); // 1.Account를 가지고 있는지 확인
+    //2.newAccount 가 필요한 경우 true 
     const onChange = (event) => {
         const {target: {name, value}} = event;
         if(name === "email") {
@@ -13,15 +14,19 @@ const Auth = () => {
             setPassword(value)
         }
     }
-    const onSubmit = async (event) => { // createUserWithEmailAndPassword는 promise를 return 하기 때문에 async로 비동기화 시킴
+    const onSubmit = async (event) => { // createUserWithEmailAndPassword는 
+      //promise를 return 하기 때문에 async로 비동기화 시킴
         event.preventDefault();
         try {
             let data;
-            if(newAccount) { // newAccount의 상태에 따라서 받은 input을 submit의 method로 계정 생성에 쓸건지, 로그인에 쓸건지 조건을 주고 있다.
-                data = await authService.createUserWithEmailAndPassword(email, password);
+            if (newAccount) {
+              data = await authService.createUserWithEmailAndPassword(
+                email,
+                password
+              );
             } else {
-                data = await authService.signInWithEmailAndPassword(email, password);
-            }
+              data = await authService.signInWithEmailAndPassword(email, password);
+             }
             console.log(data);
         } catch(error) {
             console.log(error);
