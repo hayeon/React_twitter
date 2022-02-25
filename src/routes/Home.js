@@ -6,8 +6,9 @@ const [tweet, setTweet] = useState("");
 
 //트윗 읽어오기
 const getTweets = async() => {
-    const dbTweets = await dbService.colletion("tweets").get();
-    console.log(dbTweets);
+    const dbTweets = await dbService.colletion("tweets").on
+    dbTweets.forEach((document) => { console.log(document.data());
+    });    
 };
 //useEffect => 컴포넌트가 마운트된 이후, 문서를 처리해주는 함수
 //useEffect(function, deps(배열));
