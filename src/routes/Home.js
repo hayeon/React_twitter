@@ -3,11 +3,16 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
 const [tweet, setTweet] = useState("");
+//트윗 게시물을 목록으로 만들기
+const [tweets, setTweets] = useState([]);
 
 //트윗 읽어오기
 const getTweets = async() => {
-    const dbTweets = await dbService.colletion("tweets").on
-    dbTweets.forEach((document) => { console.log(document.data());
+    //dbTweets tweets 가져온 변수
+    const dbTweets = await dbService.collection("tweets").get();
+  //dbTweets 자체는 내용이 숨겨져 있음 따라서 forEach 사용
+     dbTweets.forEach((document) => { 
+        setTweets((prev) => [document.data(), ...prev]);
     });    
 };
 //useEffect => 컴포넌트가 마운트된 이후, 문서를 처리해주는 함수
