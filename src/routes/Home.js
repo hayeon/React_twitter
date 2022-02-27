@@ -1,3 +1,4 @@
+import Tweet from "components/Tweet";
 import { dbService } from "fbase";
 import { useEffect, useState } from "react";
 
@@ -9,7 +10,7 @@ const [tweets, setTweets] = useState([]);
 //실시간 트윗 읽어오기
 //useEffect => 컴포넌트가 마운트된 이후, 문서를 처리해주는 함수
 //useEffct(function, deps(배열));
-useEffect(() => {
+useEffect(() => { //map 함수는 순회하며 만든 배열을 return 하여 1번만 setTweets 함수에 전달하여 효율적
     dbService.collection("tweets").onSnapshot((snapshot) =>{
         const newArray = snapshot.docs.map((document) => ({
             id: document.id, 
@@ -58,9 +59,8 @@ return (
         tweets.map(tweet)는 tweets에 있는 tweet에 Function을 실행하고, Function에서 나온 값을 저장해서 배열을 return
         tweets에 tweet을 추가함*/}
         {tweets.map((tweet) => (
-            <div key={tweet.id}>
-                <h4>{tweet.text}</h4>
-            </div>
+            //Tweet 컴포넌트 추가 
+           <Tweet key={tweet.id} TweetObj = {tweet} />
         ))}
     </div>
     </>
