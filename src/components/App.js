@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import AppRouter from "components/Router";
 import { authService } from "fbase";
 
-function App() {
+function App () {
+  // 초기화 상태
   const [init, setInit] = useState(false);
+  //로그인여부
   const [isLoggedIn, setIsLoggedIn] = useState(false); //초기값 false
+ //로그인자의 정보 관리
   const [userObj, setUserObj] = useState(null);
   //2초마다 authSerivce를 실행하여 콘솔로 찍힘 < () => = function >
   //setInterval(() => console.log(authService.currentUser), 2000);
@@ -26,6 +29,7 @@ function App() {
   //삼항 연산자로 init 상태 검사
   return (
     <> 
+    {/* init이 참: 라우터isLoggedIn / userObj,  거짓: 초기화중 출력  */}
     {init ? ( <AppRouter isLoggedIn = {isLoggedIn} userObj={userObj}/> 
     ):( "initializing..."  ) }
 

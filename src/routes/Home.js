@@ -60,7 +60,8 @@ return (
         tweets에 tweet을 추가함*/}
         {tweets.map((tweet) => (
             //Tweet 컴포넌트 추가 
-           <Tweet key={tweet.id} TweetObj = {tweet} />
+            //key는 React가 어떤 항목을 변경할지 식별하는 것을 돕는다. key는 element에 안정적 고유성을 부여하기 위해 배열 내부의 엘리먼트에 지정
+           <Tweet key={tweet.id} tweetObj = {tweet} />
         ))}
     </div>
     </>
