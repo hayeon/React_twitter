@@ -47,7 +47,7 @@ const onChange = (event) => {
 return (
     <>
     <form onSubmit={onSubmit}>
-        <input value={tweet} onChange={onChange} type="text" placeholder="What's on your mind?"
+        <input value={tweet} onChange={onChange} type="text" placeholder="트윗을 작성하세요."
         maxLength={120} />
         <input type={"submit"} value = "Tweet"/>
     </form>
@@ -60,8 +60,11 @@ return (
         {tweets.map((tweet) => (
             //Tweet 컴포넌트 추가 
             //key는 React가 어떤 항목을 변경할지 식별하는 것을 돕는다. key는 element에 안정적 고유성을 부여하기 위해 배열 내부의 엘리먼트에 지정
-           <Tweet key={tweet.id} tweetObj = {tweet} />
-        ))};
+        
+        <Tweet key={tweet.id} tweetObj= {tweet} 
+        //작성자 ID===로그인 아이디
+        isWriter = {tweet.creatorID === userObj.uid} />
+        ))}
     </div>
     </>
 );
