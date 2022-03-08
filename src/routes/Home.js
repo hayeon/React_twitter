@@ -35,7 +35,7 @@ const onSubmit = async (event) => {
     setTweet("");
     
 };
-
+//트윗 작성
 const onChange = (event) => {
     event.preventDefault();
     const {
@@ -43,15 +43,37 @@ const onChange = (event) => {
     } = event;
     setTweet(value);
     };
+    
+    
+    
+    //onChange 속성, 함수
+    const onFileChange = (event) => {
+
+    };
+            
+    //     event.preventDefault();
+    //     const  { target : {files},}  = event;
+    //     const fileInfo = files[0];
+       
+    //     //미리 보기 기능 구현
+    //     //브라우저 API FileReader : new 키워드와 함께 사용해야함
+    //     const reader = new FileReader();   
+    //     reader.onloadend = (finishedEvent) => {
+    //         console.log(finishedEvent);
+    //     } ;
+    //     //readAsDataURL: 파일 정보를 인자로 받아 파일 위치를 url로 반환
+    //     //★이 함수는 리액트 생명주기 함수처럼 파일 선택 후, "웹 브라우저가 파일을 인식하는 시점/ 인식이 끝난 시점을 포함하여 관리해야함"   
+    //     reader.readAsDataURL(fileInfo);
+    // }; 
 
 return (
     <>
     <form onSubmit={onSubmit}>
         <input value={tweet} onChange={onChange} type="text" placeholder="트윗을 작성하세요."
-        maxLength={120} />
-        <input type={"submit"} value = "Tweet"/>
+        maxLength={240} />
+    <input  type="file"   accept="image/png, image/gif, image/jpeg, video/mp4, video/avi"></input>
+    <input type={"submit"} value = "Tweet"/>
     </form>
-    
     {/* 트윗보여줌 */}
     <div>
         {/* map(): 배열을 순회하는 함수  

@@ -24,6 +24,7 @@ const onChange = (event) => {
        const { target : {value} } = event;
        setNewTweet(value);
     };
+    //트윗수정 db 연동
 const onSubmit = async (event) => {
     event.preventDefault();
     await dbService.doc(`tweets/${tweetObj.id}`).update({text : newTweet});
