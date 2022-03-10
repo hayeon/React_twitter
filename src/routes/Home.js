@@ -48,7 +48,8 @@ const onChange = (event) => {
     
     //onChange 속성, 함수
     const onFileChange = (event) => {
-
+        const {
+            target: {files} } = addEventListener;
     };
             
     //     event.preventDefault();
@@ -71,7 +72,7 @@ return (
     <form onSubmit={onSubmit}>
         <input value={tweet} onChange={onChange} type="text" placeholder="트윗을 작성하세요."
         maxLength={240} />
-    <input  type="file"   accept="image/png, image/gif, image/jpeg, video/mp4, video/avi"></input>
+    <input  type="file" onChange={onFileChange} accept="image/png, image/gif, image/jpeg, video/mp4, video/avi"></input>
     <input type={"submit"} value = "Tweet"/>
     </form>
     {/* 트윗보여줌 */}
