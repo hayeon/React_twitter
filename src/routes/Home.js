@@ -6,6 +6,8 @@ const Home = ({userObj}) => {
  const [tweet, setTweet] = useState("");
 //트윗 게시물을 목록으로 만들기
 const [tweets, setTweets] = useState([]);
+//콘텐츠 url 상태관리
+const [contentURL, setcontentURL] = useState("");
 
 //실시간 트윗 읽어오기
 //useEffect => 컴포넌트가 마운트된 이후, 문서를 처리해주는 함수
@@ -45,35 +47,34 @@ const onChange = (event) => {
     };
     
     
-    
-    //onChange 속성, 함수
+    //onChange 속성함수, 선택 파일을 그대로 읽어옴
     const onFileChange = (event) => {
         const {
-            target: {files} } = addEventListener;
+            target: {files} } = event;
+        const fileInfo = files[0]; 
+        //이미지 출력 기능 구현
+        //브라우저 API FileReader : new 키워드와 함께 사용해야함
+        const filereader = new FileReader();
+        filereader.onloadend = (fileloadEvent) => {
+           console.log(fileloadEvent);
+        //     const {
+        //        currentTarget : {result},
+        //    } = fileloadEvent;
+           
+        //     setcontentURL(result);
+         };
+        //readAsDataURL 파일정보를 URL로 반환 * img ="www.dsf.dsfsdc" 요거
+        filereader.readAsDataURL(fileInfo);
     };
             
-    //     event.preventDefault();
-    //     const  { target : {files},}  = event;
-    //     const fileInfo = files[0];
-       
-    //     //미리 보기 기능 구현
-    //     //브라우저 API FileReader : new 키워드와 함께 사용해야함
-    //     const reader = new FileReader();   
-    //     reader.onloadend = (finishedEvent) => {
-    //         console.log(finishedEvent);
-    //     } ;
-    //     //readAsDataURL: 파일 정보를 인자로 받아 파일 위치를 url로 반환
-    //     //★이 함수는 리액트 생명주기 함수처럼 파일 선택 후, "웹 브라우저가 파일을 인식하는 시점/ 인식이 끝난 시점을 포함하여 관리해야함"   
-    //     reader.readAsDataURL(fileInfo);
-    // }; 
-
 return (
     <>
     <form onSubmit={onSubmit}>
         <input value={tweet} onChange={onChange} type="text" placeholder="트윗을 작성하세요."
         maxLength={240} />
-    <input  type="file" onChange={onFileChange} accept="image/png, image/gif, image/jpeg, video/mp4, video/avi"></input>
+    <input  type="file" onChange={onFileChange} accept="image/*"></input>
     <input type={"submit"} value = "Tweet"/>
+   { contentURL && <img src="contentURL" width="60px" height="60px"></img> }
     </form>
     {/* 트윗보여줌 */}
     <div>
