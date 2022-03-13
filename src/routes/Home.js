@@ -56,12 +56,13 @@ const onChange = (event) => {
         //브라우저 API FileReader : new 키워드와 함께 사용해야함
         const filereader = new FileReader();
         filereader.onloadend = (fileloadEvent) => {
-           console.log(fileloadEvent);
-        //     const {
-        //        currentTarget : {result},
-        //    } = fileloadEvent;
+          
+           const {
+               currentTarget : {result},
+           } = fileloadEvent;
            
-        //     setcontentURL(result);
+            setcontentURL(result);
+            console.log(contentURL);
          };
         //readAsDataURL 파일정보를 URL로 반환 * img ="www.dsf.dsfsdc" 요거
         filereader.readAsDataURL(fileInfo);
@@ -74,7 +75,7 @@ return (
         maxLength={240} />
     <input  type="file" onChange={onFileChange} accept="image/*"></input>
     <input type={"submit"} value = "Tweet"/>
-   { contentURL && <img src="contentURL" width="60px" height="60px"></img> }
+   { contentURL && <img src={contentURL} width="60px" height="60px"></img> }
     </form>
     {/* 트윗보여줌 */}
     <div>
