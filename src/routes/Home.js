@@ -1,6 +1,7 @@
 import Tweet from "components/Tweet";
-import { dbService } from "fbase";
+import { dbService,storageService } from "fbase";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const Home = ({userObj}) => {
  const [tweet, setTweet] = useState("");
@@ -8,7 +9,6 @@ const Home = ({userObj}) => {
 const [tweets, setTweets] = useState([]);
 //콘텐츠 url 상태관리
 const [contentURL, setcontentURL] = useState("");
-
 //실시간 트윗 읽어오기
 //useEffect => 컴포넌트가 마운트된 이후, 문서를 처리해주는 함수
 //useEffct(function, deps(배열));
@@ -28,14 +28,21 @@ const onSubmit = async (event) => {
     //promise 반환하여 async-await문 사용
     //tweets 컬렉션 생성하는 dbService
     //.add를 사용하여 해당 컬렉션에 문서 생성
-    await dbService.collection("tweets").add({
-        text: tweet,
-        createdAT:Date.now(),
-        creatorID: userObj.uid,
-    }); 
-    //db로 전송 후, setTweet으로 tweet을 빈 문자열로 초기화
-    setTweet("");
-    
+    // await dbService.collection("tweets").add({
+    //     text: tweet,
+    //     createdAT:Date.now(),
+    //     creatorID: userObj.uid,
+    // }); 
+    // //db로 전송 후, setTweet으로 tweet을 빈 문자열로 초기화
+    // setTweet("");
+
+     //템플릿 리터럴 userObj.uid + uuid 폴더 + 파일이름 설정 
+     //스토리지, 레퍼런스를 순서대로 호출한 다음, child 함수에 사용자 아이디를 폴더이름으로, 파일 이름을 uuidv4로 처리
+     //파일 확장자의 경우 업로드 과정에서 자동 설정
+    const contentURLRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+    const response = await contentURLRef.putString(contentURL, "data_url");
+    //스토리지에서 파일 불러오기 response.ref.getDownloadURL() 참고로 스냅샷 레퍼런스임 
+    console.log(await response.ref.getDownloadURL());    
 };
 //트윗 작성
 const onChange = (event) => {
@@ -67,6 +74,8 @@ const onChange = (event) => {
         //readAsDataURL 파일정보를 URL로 반환 * img ="www.dsf.dsfsdc" 요거
         filereader.readAsDataURL(fileInfo);
     };
+    //파일선택 취소
+    const onClearContent = () => setcontentURL ("");
             
 return (
     <>
@@ -75,8 +84,15 @@ return (
         maxLength={240} />
     <input  type="file" onChange={onFileChange} accept="image/*"></input>
     <input type={"submit"} value = "Tweet"/>
-   { contentURL && <img src={contentURL} width="60px" height="60px"></img> }
-    </form>
+    {/*이미지 선택 /선택취소*/}
+    { contentURL && (
+    <div>
+     <img src={contentURL} width="60px" height="60px"></img>     
+     <button onClick={onClearContent}>선택 이미지 삭제</button>
+     </div>
+    )}
+</form>
+
     {/* 트윗보여줌 */}
     <div>
         {/* map(): 배열을 순회하는 함수  
