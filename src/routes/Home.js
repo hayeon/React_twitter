@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 const Home = ({userObj}) => {
- const [tweet, setTweet] = useState("");
+const [tweet, setTweet] = useState("");
 //트윗 게시물을 목록으로 만들기
 const [tweets, setTweets] = useState([]);
 //콘텐츠 url 상태관리
@@ -21,6 +21,7 @@ useEffect(() => { //map 함수는 순회하며 만든 배열을 return 하여 1�
         setTweets(newArray);
     });
 }, []);
+
 //useEffect는 async-await문을 사용한 함수를 인자로 사용할 시 따로 정의하고 사용해야함
 const onSubmit = async (event) => {
     event.preventDefault();
@@ -82,7 +83,7 @@ return (
     <form onSubmit={onSubmit}>
         <input value={tweet} onChange={onChange} type="text" placeholder="트윗을 작성하세요."
         maxLength={240} />
-    <input  type="file" onChange={onFileChange} accept="image/*"></input>
+    <input type="file" onChange={onFileChange} accept="image/*"></input>
     <input type={"submit"} value = "Tweet"/>
     {/*이미지 선택 /선택취소*/}
     { contentURL && (
