@@ -3,6 +3,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import "firebase/storage";
 
+
 const firebaseConfig = {
 apiKey: "AIzaSyCQGa4Ncx_thjRBRbo72CNluEq5xxn6oTE",
 authDomain: "ntwitter-139c8.firebaseapp.com",

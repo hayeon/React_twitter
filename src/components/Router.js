@@ -8,7 +8,7 @@ const AppRouter = ({isLoggedIn, userObj }) => {
     return (
         <Router>
           {/* isLoggedIn이 true인 경우, Navigation이 보임  and 연산자 && */}
-           {isLoggedIn && <Navigation></Navigation>}
+           {isLoggedIn && <Navigation userObj={userObj}></Navigation>}
             <Switch>
                {isLoggedIn ? (
                    <>

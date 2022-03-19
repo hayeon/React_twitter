@@ -1,7 +1,7 @@
 //Link를 사용하여 페이지 이동 구현
 import { Link } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = ({userObj}) => {
     return (
     <nav>
         <ul>
@@ -11,7 +11,7 @@ const Navigation = () => {
             </li>
             <li>
                 {/* 프로필 */}
-                <Link to="/profile">My profile</Link>
+                <Link to="/profile">{userObj.displayName}의 프로필</Link>
             </li>
         </ul>
     </nav>
