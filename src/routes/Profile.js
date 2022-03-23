@@ -1,25 +1,25 @@
-import { authService, dbService } from "fbase";
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
+import { authService } from "fbase";
+import { updateProfile } from "fbase";
 
 const Profie = ({userObj}) => {
     const [newDisplayname, setNewDisplayName] = useState(userObj.displayName);
-    console.log(userObj);
-    //로그아웃
-    const onLogoutClick = () => {
-        authService.signOut();
-    };
+   
     const onChange = (event) => {
         const { target : {value} } = event;
-        setNewDisplayName(value);
+       setNewDisplayName(value);
     };
 
-
-    const onSumbit = async (event) => {
+    const onSubmit = async (event) => {
         event.preventDefault();
        if (userObj.displayName !== newDisplayname) {
-           await 
+            console.log(userObj.updateProfile);
        }
+    
+    };
+     //로그아웃
+     const onLogoutClick = () => {
+        authService.signOut();
     };
 // //내가 작성한 트윗만 모아보기
 // const getMyTweets = async () => { //where ("필드", "조건", "찾으려는 값") creatId 필드에서 uid와 값은 값을 찾아라
@@ -35,9 +35,9 @@ const Profie = ({userObj}) => {
     
     return (
         <>
-        <form onSumbit = {onSumbit}>
-            <input onChange={onChange} type="text" placeholder="닉네임을 입력하세요" value={userObj.displayName}/>
-            <input type="submit" value="수정하기"/>
+          <form onSubmit={onSubmit}>
+            <input onChange={onChange} type="text" placeholder="닉네임을 입력하세요" value= {userObj.displayName} />
+            <input onSubmit={onSubmit} type="submit" value="수정하기"/>
         </form>
         <button onClick={onLogoutClick}> 로그아웃 헤헹</button>
         </>
