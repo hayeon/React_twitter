@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { authService } from "fbase";
-import { updateProfile } from "fbase";
+
 
 const Profie = ({userObj}) => {
     const [newDisplayname, setNewDisplayName] = useState(userObj.displayName);
@@ -9,7 +9,7 @@ const Profie = ({userObj}) => {
         const { target : {value} } = event;
        setNewDisplayName(value);
     };
-
+    
     const onSubmit = async (event) => {
         event.preventDefault();
        if (userObj.displayName !== newDisplayname) {
@@ -36,8 +36,8 @@ const Profie = ({userObj}) => {
     return (
         <>
           <form onSubmit={onSubmit}>
-            <input onChange={onChange} type="text" placeholder="닉네임을 입력하세요" value= {userObj.displayName} />
-            <input onSubmit={onSubmit} type="submit" value="수정하기"/>
+            <input onChange={onChange} value={newDisplayname} type="text" placeholder="닉네임을 입력하세요"  />
+            <button onSubmit={onSubmit} type="submit">수정하기</button>
         </form>
         <button onClick={onLogoutClick}> 로그아웃 헤헹</button>
         </>
