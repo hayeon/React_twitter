@@ -26,7 +26,7 @@ function App () {
 
        }
         else { 
-          setIsLoggedIn(false);    
+          setUserObj(false); 
         }
         setInit(true);
       });
