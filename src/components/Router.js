@@ -4,7 +4,8 @@ import Home from "routes/Home";
 import Profie from "routes/Profile";
 import Navigation from "./Navigation";
 
-const AppRouter = ({isLoggedIn, userObj }) => {
+
+const AppRouter = ({isLoggedIn, userObj, refreshUser }) => {
     return (
         <Router>
           {/* isLoggedIn이 true인 경우, Navigation이 보임  and 연산자 && */}
@@ -16,7 +17,7 @@ const AppRouter = ({isLoggedIn, userObj }) => {
                        <Home userObj ={userObj}/>
                    </Route>
                    <Route exact path = "/Profile">
-                   <Profie userObj = {userObj}/>
+                   <Profie refreshUser= {refreshUser}  userObj = {userObj}/>
                </Route>
                    </>
                ) : (

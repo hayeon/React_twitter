@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { authService } from "fbase";
 
 
-const Profie = ({userObj}) => {
+const Profie = ({userObj, refreshUser}) => {
     const [newDisplayname, setNewDisplayName] = useState(userObj.displayName);
    
     const onChange = (event) => {
@@ -13,7 +13,8 @@ const Profie = ({userObj}) => {
     const onSubmit = async (event) => {
         event.preventDefault();
        if (userObj.displayName !== newDisplayname) {
-            console.log(userObj.updateProfile);
+          await userObj.updateProfile ( {displayName: newDisplayname});
+          refreshUser();
        }
     
     };

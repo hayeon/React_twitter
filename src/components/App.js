@@ -16,9 +16,14 @@ function App () {
     //fb 로그인 정보를 받게되었을 때(fb가 초기화될 때) 실행되는 useEffect(특정한 시점에 실행되게 함)
   useEffect( () => { //인증관련 상태가 바뀌는 것을 감지하는 함수
     authService.onAuthStateChanged((user) => {
-      if (user) { //user 값이 있는 경우, isLoggedIn을 user로 설정
-        setIsLoggedIn(user);
-        setUserObj(user);
+      if (user) {
+        //userObj 값 줄이기 필요한 것만 뽑아 씀
+        setUserObj({
+          uid: user.uid,
+          displayName : user.displayName,
+          updateProfile : (args) => user.updateProfile(args),
+        });
+
        }
         else { 
           setIsLoggedIn(false);    
@@ -26,11 +31,28 @@ function App () {
         setInit(true);
       });
   }, []);
+
+    //함수가 실행되면 현재의 유저값을 통해 따끈따끈한 유저 업데이트
+    
+    const refreshUser = () =>{
+      const user = authService.currentUser;
+      setUserObj({
+      uid: user.uid,
+      displayName : user.displayName,
+      updateProfile : (args) => user.updateProfile(args),
+    });
+
+  }
   //삼항 연산자로 init 상태 검사
   return (
     <> 
     {/* init이 참: 라우터isLoggedIn / userObj,  거짓: 초기화중 출력  */}
-    {init ? ( <AppRouter isLoggedIn = {isLoggedIn} userObj={userObj}/> 
+    {init ? ( 
+    <AppRouter 
+    refreshUser = {refreshUser}
+    //값을 검사해서 있으면 참, 없으면 거짓
+    isLoggedIn = {Boolean(userObj)} 
+    userObj={userObj}/> 
     ):( "initializing..."  ) }
 
     <footer>
