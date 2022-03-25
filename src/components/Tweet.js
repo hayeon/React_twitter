@@ -45,7 +45,7 @@ const onSubmit = async (event) => {
                 </>
 
         ) : (
-            <>
+            <div>
 
     <h4>{tweetObj.text}</h4> {/*트윗출력*/}
     {tweetObj.showURL && (
@@ -58,7 +58,7 @@ const onSubmit = async (event) => {
     <button onClick={EditCancel}>수정하기</button>
     </>
 )}
-</>
+</div>
         )}
     </div>
 );

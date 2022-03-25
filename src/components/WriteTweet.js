@@ -1,3 +1,6 @@
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react";
 import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from 'uuid';

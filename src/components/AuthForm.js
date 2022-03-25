@@ -1,8 +1,6 @@
-
 //회원가입 /로그인 관련
 import { authService } from 'fbase';
 import React, { useState } from 'react';
-
 
 const AuthForm = () => {
     const [email, setEmail] = useState("");
@@ -42,16 +40,18 @@ const AuthForm = () => {
    const toggleAccount = () => setNewAccount((prev) => !prev);
 
 return(
+
 <div>
-<form onSubmit={onSubmi}>
-    <input name="email" type="email" placeholder="Email" required value={email} onChange={onChange}/>
-    <input name="password" type="password" placeholder="Password" required value={password} onChange={onChange}/>
-    <input type="submit" value={newAccount ? "Create Account" : "Log In"} /> 
-    <p>{error}</p>
-</form>
+<form onSubmit={onSubmit} className = "containter">
+    <input name="email" type="email" placeholder="Email" required value={email} onChange={onChange} className="authInput"/>
+    <input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} className="authInput"/>
+    <input type="submit" value={newAccount ? "Create Account" : "Log In"}  className="authInput authSubmit" /> 
+    <p>{error && <span className="authError">{error}</span>}</p>
+ </form>
+
 {/* 토글버튼 */}
-<span onClick={toggleAccount}>
-{newAccount ? "Sign in" : "Create Account"}
+<span onClick={toggleAccount} className="authSwitch">
+{newAccount ? "로그인하기" : "계정 만들기"}
 </span>
 </div>
 )

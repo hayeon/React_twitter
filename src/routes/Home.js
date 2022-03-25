@@ -19,12 +19,13 @@ useEffect(() => { //map 함수는 순회하며 만든 배열을 return 하여 1�
 }, []);
 
     return (
-        <>
+        <div className="container">
+        
     {/* 트윗 작성 컴포넌트 노출 */}
     <WriteTweet userObj = {userObj}/>
 
     {/* 트윗보여줌 */}
-    <div>
+    <div style={{marginTop : 30}}>
         {/* map(): 배열을 순회하는 함수  
         tweets.map(tweet)는 tweets에 있는 tweet에 Function을 실행하고, Function에서 나온 값을 저장해서 배열을 return
         tweets에 tweet을 추가함*/}
@@ -37,7 +38,7 @@ useEffect(() => { //map 함수는 순회하며 만든 배열을 return 하여 1�
         isWriter = {tweet.creatorID === userObj.uid} />
         ))}
     </div>
-    </>
+    </div>
     )
 };
 

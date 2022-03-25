@@ -1,4 +1,11 @@
 //회원가입 /로그인 관련
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faTwitter,
+    faGoogle,
+    faGithub,
+} from "@fortawesome/free-brands-svg-icons";
+import AuthForm from 'components/AuthForm';
 import { authService,firebaseInstace } from 'fbase';
 import React from 'react';
 
@@ -20,12 +27,24 @@ const Auth = () => {
     };
 
     return (
-        <div>
-            <button onClick={onSocialClick} name = "goggle">
-                Continue with Google</button>
-            <button onClick={onSocialClick} name = "github">
-                Continue with Github</button>
-        </div>
+        <div className='authContainer'>
+            <FontAwesomeIcon
+            icon={faTwitter}
+            size="3x"
+            style={{marginBottom : 30}}
+            ></FontAwesomeIcon>
+
+            <AuthForm></AuthForm>
+            
+            <div className='authBtns'>
+            <button onClick={onSocialClick} name = "goggle" className='authBtn'>
+                Continue with Google <FontAwesomeIcon icon={faGoogle}/> </button>
+                
+            <button onClick={onSocialClick} name = "github" className='authBtn'>
+                Continue with Github <FontAwesomeIcon icon= {faGithub} /></button>
+                </div>
+                </div>
+        
     );
 }
 export default Auth ;
