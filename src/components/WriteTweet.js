@@ -1,6 +1,6 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react";
 import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from 'uuid';
@@ -13,6 +13,10 @@ const WriteTweet=  ({userObj}) => {
       //useEffect는 async-await문을 사용한 함수를 인자로 사용할 시 따로 정의하고 사용해야함
     const onSubmit = async (event) => {
         event.preventDefault();
+        //트윗이 공백이면 동작하지 않음
+        if(tweet === "") {
+            return;
+        }
         let showURL = "";
         if(contentURL !=="") {
     //사진을 스토리지에 만드는 로직: 스토리지, 레퍼런스를 순서대로 호출한 다음, child 함수에 사용자 아이디를 폴더이름으로, 파일 이름을 uuidv4로 처리 파일 확장자의 경우 업로드 과정에서 자동 설정
@@ -66,22 +70,46 @@ const WriteTweet=  ({userObj}) => {
     //파일선택 취소 로직
     const onClearContent = () => setcontentURL ("");
 
-    return (
-        
-        <form onSubmit={onSubmit}>
-            <input value={tweet} onChange={onChange} type="text" placeholder="트윗을 작성하세요."
-            maxLength={240} />
-        <input type="file" onChange={onFileChange} accept="image/*"></input>
-        <input type={"submit"} value = "Tweet"/>
-        {/*이미지 선택 /선택취소*/}
-        { contentURL && (
-        <div>
-         <img src={contentURL} width="60px" height="60px"></img>     
-         <button onClick={onClearContent}>선택 이미지 삭제</button>
-         </div>
-        )}
-    </form>   
-    );
+return (
+    <form onSubmit={onSubmit} className="factoryForm">
+      <div className="factoryInput__container">
+        <input
+          className="factoryInput__input"
+          value={tweet}
+          onChange={onChange}
+          type="text"
+          placeholder="무슨 생각을 하고 있나요?"
+          maxLength={120}
+        />
+        <input type="submit" value="&rarr;" className="factoryInput__arrow" />
+      </div>
+      <label form="attach-file" className="factoryInput__label">
+        <span>Add photos</span>
+        <FontAwesomeIcon icon={faPlus} />
+      </label>
+
+      <input
+        id="attach-file"
+        type="file"
+        accept="image/*"
+        onChange={onFileChange}
+        style={{
+          opacity: 0,
+        }}
+      />
+      {contentURL && (
+        <div className="factoryForm__attachment">
+          <img src={contentURL}
+            style={{ backgroundImage: contentURL, }}
+          />
+          <div className="factoryForm__clear" onClick={onClearContent}>
+            <span>Remove</span>
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
+        </div>
+      )}
+    </form>
+  );
 };
 
 export default WriteTweet;

@@ -1,5 +1,7 @@
 import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
 // //Home.js 컴포넌트의 map 함수가 반환하는 TweetObj 배열을 props로 받는 점만 다름
 const Tweet = ({tweetObj, isWriter}) => {
@@ -34,36 +36,45 @@ const onSubmit = async (event) => {
 }
 
  return (
-    <div>
+    <div className="nweet">
         {edit ? (
             <>
-            <form onSubmit={onSubmit}>
-                <input onChange={onChange} value={newTweet} required></input>
-                <button onSubmit={onSubmit} type="submit">수정하기</button>
-                </form>
-                <button onClick={EditCancel}>취소</button>
-                </>
+           <form onSubmit={onSubmit} className="container nweetEdit">
+            <input
+              onChange={onChange}
+              value={newTweet}
+              required
+              placeholder="Edit your nweet"
+              autoFocus
+              className="formInput"
+            />
+            <input type="submit" value="Update Nweet" className="formBtn" />
+          </form>
+          <button onClick={EditCancel} className="formBtn cancelBtn">
+            취소
+          </button>
+          </>
 
         ) : (
-            <div>
-
+            <>
     <h4>{tweetObj.text}</h4> {/*트윗출력*/}
     {tweetObj.showURL && (
         <img src={tweetObj.showURL} width = "50px" height="50px" />
     )}
-   
     {isWriter && ( //작성자일 경우에만 버튼 플래그먼트 노출
-    <>
-    <button onClick={onDeleteClick}>삭제하기</button>
-    <button onClick={EditCancel}>수정하기</button>
-    </>
-)}
-</div>
-        )}
+    <div className="nweet__actions">
+        <span onClick={onDeleteClick}>
+            <FontAwesomeIcon icon={faTrash} />
+        </span>
+        <span onClick={EditCancel}>
+            <FontAwesomeIcon icon={faPencilAlt} />
+            </span>
+            </div>
+          )}
+        </>
+      )}
     </div>
-);
-    };
-
-
+  );
+};
 
 export default Tweet;
