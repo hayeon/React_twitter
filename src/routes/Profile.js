@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { authService } from "fbase";
-
+import { useHistory } from "react-router-dom";
 
 const Profie = ({userObj, refreshUser}) => {
     const [newDisplayname, setNewDisplayName] = useState(userObj.displayName);
-   
+    const history = useHistory();
     const onChange = (event) => {
         const { target : {value} } = event;
        setNewDisplayName(value);
@@ -21,7 +21,9 @@ const Profie = ({userObj, refreshUser}) => {
      //로그아웃
      const onLogoutClick = () => {
         authService.signOut();
+        history.push("/");
     };
+    
 // //내가 작성한 트윗만 모아보기
 // const getMyTweets = async () => { //where ("필드", "조건", "찾으려는 값") creatId 필드에서 uid와 값은 값을 찾아라
 // const tweets = await dbService.collection("tweets").where("creatorId", "==", `${userObj.uid}`)
@@ -35,13 +37,17 @@ const Profie = ({userObj, refreshUser}) => {
 // useEffect( () => {getMyTweets()}, [userObj]);
     
     return (
-        <>
-          <form onSubmit={onSubmit}>
-            <input onChange={onChange} value={newDisplayname} type="text" placeholder="닉네임을 입력하세요"  />
-            <button onSubmit={onSubmit} type="submit">수정하기</button>
+        <div className="container">
+          <form onSubmit={onSubmit} className = "profileForm">
+            <input onChange={onChange} value={newDisplayname} type="text" placeholder="닉네임을 입력하세요" autoFocus
+             className="formInput" />
+            <button onSubmit={onSubmit}  className= "formBtn" type="submit" style={{
+                marginTop : 10,
+            }}>수정하기</button>
         </form>
-        <button onClick={onLogoutClick}> 로그아웃 헤헹</button>
-        </>
+        <span className="formBtn cancleBtn logOut" onClick={onLogoutClick}>계정 로그아웃하기</span> 
+       
+        </div>
         );
     };
 

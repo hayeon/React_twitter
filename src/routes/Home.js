@@ -9,7 +9,9 @@ const [tweets, setTweets] = useState([]);
 
 //실시간 트윗 읽어오기 useEffect => 컴포넌트가 랜더링된 이후, 실행될 함수  useEffct(function, deps(배열 OR 빈 배열));
 useEffect(() => { //map 함수는 순회하며 만든 배열을 return 하여 1번만 setTweets 함수에 전달하여 효율적
-    dbService.collection("tweets").onSnapshot((snapshot) =>{
+    dbService.collection("tweets")
+   // .orderBy("createdAt", "desc") //최신순으로 정렬
+    .onSnapshot((snapshot) =>{
         const newArray = snapshot.docs.map((document) => ({
             id: document.id, 
             ...document.data(),

@@ -62,11 +62,15 @@ const WriteTweet=  ({userObj}) => {
            } = fileloadEvent;
            
             setcontentURL(result);
-            console.log(contentURL);
          };
+
         //readAsDataURL 파일정보를 URL로 반환 * img ="www.dsf.dsfsdc" 요거
-        filereader.readAsDataURL(fileInfo);
-    };
+        //filereader.readAsDataURL(fileInfo);
+        if (Boolean(false)) {
+          filereader.readAsDataURL(fileInfo);
+        }
+    
+      };
     //파일선택 취소 로직
     const onClearContent = () => setcontentURL ("");
 

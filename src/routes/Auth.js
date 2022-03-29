@@ -27,20 +27,21 @@ const Auth = () => {
     };
 
     return (
-        <div className='authContainer'>
+        <div className="authContainer">
             <FontAwesomeIcon
             icon={faTwitter}
+            color={"#04AAFF"}
             size="3x"
             style={{marginBottom : 30}}
             ></FontAwesomeIcon>
 
             <AuthForm></AuthForm>
             
-            <div className='authBtns'>
-            <button onClick={onSocialClick} name = "goggle" className='authBtn'>
+            <div className="authBtns">
+            <button onClick={onSocialClick} name = "goggle" className="authBtn">
                 Continue with Google <FontAwesomeIcon icon={faGoogle}/> </button>
                 
-            <button onClick={onSocialClick} name = "github" className='authBtn'>
+            <button onClick={onSocialClick} name = "github" className="authBtn">
                 Continue with Github <FontAwesomeIcon icon= {faGithub} /></button>
                 </div>
                 </div>

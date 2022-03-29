@@ -31,16 +31,16 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
                    <Route exact path = "/Profile">
                    <Profie refreshUser= {refreshUser}  userObj = {userObj}/>
                </Route>
-              
-               
                </div>
                ) : (
+                   
                 <Route exact path ="/">
                 <Auth />
                 </Route>
                 )}
-                {/* /에 있지 않을 경우 /로 돌아가라  => /Profile로 이동(로그아웃) 됐을 때 돌아가라*/}
-                <Redirect from="*" to ="/" />
+               
+                {/* /에 있지 않을 경우 /로 돌아가라  => 홈으로 이동(로그아웃) 됐을 때 돌아가라*/}
+                {/* <Redirect from="*" to ="/" /> */}
                 </>
            </Switch>
         </Router>

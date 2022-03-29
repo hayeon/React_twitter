@@ -45,13 +45,14 @@ return(
 <form onSubmit={onSubmit} className = "containter">
     <input name="email" type="email" placeholder="Email" required value={email} onChange={onChange} className="authInput"/>
     <input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} className="authInput"/>
-    <input type="submit" value={newAccount ? "Create Account" : "Log In"}  className="authInput authSubmit" /> 
-    <p>{error && <span className="authError">{error}</span>}</p>
+    <input type="submit" value={newAccount ? "Create Account" : "Log In"}  
+    className="authInput authSubmit" /> 
+    {error && <span className="authError">{error}</span>}
  </form>
 
 {/* 토글버튼 */}
 <span onClick={toggleAccount} className="authSwitch">
-{newAccount ? "로그인하기" : "계정 만들기"}
+{newAccount ? "로그인" : "계정 생성하기"}
 </span>
 </div>
 )
