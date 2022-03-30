@@ -1,3 +1,4 @@
+//닉네임 수정/로그아웃하기
 import React, { useState } from "react";
 import { authService } from "fbase";
 import { useHistory } from "react-router-dom";

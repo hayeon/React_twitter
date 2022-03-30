@@ -1,10 +1,9 @@
-import { HashRouter as Router,  Redirect,  Route, Switch } from "react-router-dom"
+import { HashRouter as Router,  Route, Switch } from "react-router-dom"
 import Auth from "routes/Auth";
 import Home from "routes/Home";
 import Profie from "routes/Profile";
 import Navigation from "./Navigation";
 import Tweet from "./Tweet";
-
 
 const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
     return (
@@ -30,6 +29,9 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
                    </Route>
                    <Route exact path = "/Profile">
                    <Profie refreshUser= {refreshUser}  userObj = {userObj}/>
+                   </Route>
+                   <Route exact path = "/Tweet">
+                   <Tweet userObj = {userObj}/>
                </Route>
                </div>
                ) : (

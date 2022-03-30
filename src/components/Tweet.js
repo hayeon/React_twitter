@@ -1,13 +1,17 @@
+//트윗 수정하기
 import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
 // //Home.js 컴포넌트의 map 함수가 반환하는 TweetObj 배열을 props로 받는 점만 다름
-const Tweet = ({tweetObj, isWriter}) => {
+const Tweet = ({ tweetObj, isWriter}) => {
+   
+      
+    
     const [edit, setEdit] = useState(false); //수정클릭 시, 수정입력란과 버튼이 노출
     const [newTweet ,setNewTweet] = useState(tweetObj.text); // 입력란에 기존 트윗이 보이도록 초깃값 관리
-
+    console.log(tweetObj.creatorName);
     //트윗삭제 이벤트
 const onDeleteClick = async () => { 
     const ok = window.confirm("트윗을 삭제하시겠습니까?");//window.confirm은 확인 => true, 취소 => false 반환
@@ -44,7 +48,7 @@ const onSubmit = async (event) => {
               onChange={onChange}
               value={newTweet}
               required
-              placeholder="Edit your nweet"
+              placeholder="Edit your tweet"
               autoFocus
               className="formInput"
             />
@@ -57,7 +61,12 @@ const onSubmit = async (event) => {
 
         ) : (
             <>
-    <h4>{tweetObj.text}</h4> {/*트윗출력*/}
+    <header>{tweetObj.creatorName}</header>
+    <h3>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</h3>
+    <h2>{tweetObj.text}</h2>
+    
+    
+     {/*이미지 출력*/}
     {tweetObj.showURL && (
         <img src={tweetObj.showURL} width = "50px" height="50px" />
     )}
@@ -65,7 +74,7 @@ const onSubmit = async (event) => {
     <div className="nweet__actions">
         <span onClick={onDeleteClick}>
             <FontAwesomeIcon icon={faTrash} />
-        </span>
+        </span> 
         <span onClick={EditCancel}>
             <FontAwesomeIcon icon={faPencilAlt} />
             </span>

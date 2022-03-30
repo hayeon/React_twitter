@@ -17,6 +17,7 @@ const WriteTweet=  ({userObj}) => {
         if(tweet === "") {
             return;
         }
+       
         let showURL = "";
         if(contentURL !=="") {
     //사진을 스토리지에 만드는 로직: 스토리지, 레퍼런스를 순서대로 호출한 다음, child 함수에 사용자 아이디를 폴더이름으로, 파일 이름을 uuidv4로 처리 파일 확장자의 경우 업로드 과정에서 자동 설정
@@ -33,6 +34,7 @@ const WriteTweet=  ({userObj}) => {
             createdAT:Date.now(),
             creatorID: userObj.uid,
             showURL, //위 로직에서 만든 showURL을 스토어 컬렉션에도 넣어줌
+            creatorName : userObj.displayName
      }); 
     //db로 전송 후, setTweet으로 tweet을 빈 문자열로 초기화
         setTweet("");
