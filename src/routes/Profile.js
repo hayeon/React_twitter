@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { authService } from "fbase";
 import { useHistory } from "react-router-dom";
 
-const Profie = ({userObj, refreshUser}) => {
+const Profie = ({TweetObj, userObj, refreshUser}) => {
+  
     const [newDisplayname, setNewDisplayName] = useState(userObj.displayName);
     const history = useHistory();
     const onChange = (event) => {
@@ -15,6 +16,7 @@ const Profie = ({userObj, refreshUser}) => {
         event.preventDefault();
        if (userObj.displayName !== newDisplayname) {
           await userObj.updateProfile ( {displayName: newDisplayname});
+          await TweetObj.updateProfile ( {displayName: newDisplayname});
           refreshUser();
        }
     

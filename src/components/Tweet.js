@@ -6,9 +6,6 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
 // //Home.js 컴포넌트의 map 함수가 반환하는 TweetObj 배열을 props로 받는 점만 다름
 const Tweet = ({ tweetObj, isWriter}) => {
-   
-      
-    
     const [edit, setEdit] = useState(false); //수정클릭 시, 수정입력란과 버튼이 노출
     const [newTweet ,setNewTweet] = useState(tweetObj.text); // 입력란에 기존 트윗이 보이도록 초깃값 관리
     console.log(tweetObj.creatorName);
