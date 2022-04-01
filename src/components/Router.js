@@ -5,7 +5,8 @@ import Profie from "routes/Profile";
 import Navigation from "./Navigation";
 import Tweet from "./Tweet";
 
-const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
+const AppRouter = ({isLoggedIn, userObj, refreshUser,tweetObj}) => {
+   
     return (
         <Router>
           {/* isLoggedIn이 true인 경우, Navigation이 보임  and 연산자 && */}
@@ -28,7 +29,7 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
                        <Home userObj ={userObj}/>
                    </Route>
                    <Route exact path = "/Profile">
-                   <Profie refreshUser= {refreshUser}  userObj = {userObj}/>
+                   <Profie refreshUser= {refreshUser}  userObj = {userObj} tweetObj={tweetObj}/>
                    </Route>
                    <Route exact path = "/Tweet">
                    <Tweet userObj = {userObj}/>

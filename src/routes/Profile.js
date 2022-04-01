@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { authService } from "fbase";
 import { useHistory } from "react-router-dom";
+import { dbService } from "fbase";
 
-const Profie = ({TweetObj, userObj, refreshUser}) => {
-  
+const Profie = ({ tweetObj,userObj, refreshUser}) => {  
     const [newDisplayname, setNewDisplayName] = useState(userObj.displayName);
     const history = useHistory();
     const onChange = (event) => {
@@ -15,12 +15,13 @@ const Profie = ({TweetObj, userObj, refreshUser}) => {
     const onSubmit = async (event) => {
         event.preventDefault();
        if (userObj.displayName !== newDisplayname) {
-          await userObj.updateProfile ( {displayName: newDisplayname});
-          await TweetObj.updateProfile ( {displayName: newDisplayname});
+          await userObj.updateProfile ({displayName: newDisplayname});
+         // await dbService.doc(`tweets/${tweetObj.id}`).update({ creatorName : newDisplayname});
+          }
           refreshUser();
        }
     
-    };
+    
      //로그아웃
      const onLogoutClick = () => {
         authService.signOut();

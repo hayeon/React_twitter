@@ -1,4 +1,5 @@
 //트윗작성 콤포넌트, 실시간 트윗 가져옴
+import AppRouter from "components/Router";
 import Tweet from "components/Tweet";
 import WriteTweet from "components/WriteTweet";
 import { dbService } from "fbase";
@@ -39,13 +40,17 @@ useEffect(() => { //map 함수는 순회하며 만든 배열을 return 하여 1�
                 //Tweet 컴포넌트 추가 //key는 React가 어떤 항목을 변경할지 식별하는 것을 돕는다. key는 element에 안정적 고유성을 부여하기 위해 배열 내부의 엘리먼트에 지정
             <Tweet key={tweet.id} tweetObj= {tweet}  //작성자 ID===로그인 아이디
             isWriter = {tweet.creatorID === userObj.uid} />
-            
-            
-            
-            
             ))}
-            
         </div>
+        <>
+        {tweets.map((tweet) => 
+            (<AppRouter key={tweet.id} tweetObj= {tweet}  //작성자 ID===로그인 아이디
+      isWriter = {tweet.creatorID === userObj.uid} 
+           
+        />
+            ))}
+        
+        </>
     </div>
     )
 };
